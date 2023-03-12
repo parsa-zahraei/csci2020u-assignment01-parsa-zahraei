@@ -2,12 +2,15 @@ package com.spamdetector.domain;
 
 import java.text.DecimalFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * This class represents a file from the testing data
  * Includes the actual or real class and the predicted class according to the classifier
  * @author CSCI2020U *
  */
+
+@JsonRootName(value = "TestFiles")
 public class TestFile {
     /**
      * the name of the file this class represents
