@@ -48,6 +48,7 @@ public class SpamResource {
     }
 
     @GET
+    @Path("/json")
     @Produces("application/json")
     public Response getSpamResults() throws FileNotFoundException {
 //       TODO: return the test results list of TestFile, return in a Response object
