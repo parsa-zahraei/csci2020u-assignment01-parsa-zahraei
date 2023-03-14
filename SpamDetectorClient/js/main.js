@@ -1,7 +1,7 @@
 // TODO: onload function should retrieve the data needed to populate the UI
 
 
-function full_table(tableID, json){
+function fill_table(tableID, json){
   let tableRef = document.getElementById(tableID);
 
   for (e in json.TestFiles){
@@ -44,9 +44,9 @@ function load_accuracy(){
       "Accept": "application/json"
     },
   })
-    .then(response => response.json());
-    .catch((err)) => {
-
-  }
+    .then(response => response.json())
+    .catch((err) => {
+    console.log("something went wrong: " + err);
+  });
 
 }

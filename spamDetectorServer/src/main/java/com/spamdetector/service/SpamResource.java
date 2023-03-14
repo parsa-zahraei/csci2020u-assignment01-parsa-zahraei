@@ -30,13 +30,12 @@ public class SpamResource {
     private int falsePositives = 0;
     private int falseNegatives = 0;
 
+
     SpamResource() throws FileNotFoundException {
 //        TODO: load resources, train and test to improve performance on the endpoint calls
         System.out.print("Training and testing the model, please wait");
 
         testList = trainAndTest();
-
-        getSpamResults();
 
         APCalc();
 
@@ -45,6 +44,16 @@ public class SpamResource {
 
 //      TODO: call  this.trainAndTest();
 
+    }
+
+    @GET
+    @Produces("text/html")
+    public String rootEndpoint() {
+        String res = "Available endpoints are: <br>" +
+                "api/spam/json -- return the json file of the TestFiles <br>" +
+                "api/spam/accuracy -- returns the accuracy of the model <br>" +
+                "api/spam/precision -- returns the precision of the model";
+        return res;
     }
 
     @GET

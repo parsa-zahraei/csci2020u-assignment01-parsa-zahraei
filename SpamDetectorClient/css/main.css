@@ -10,6 +10,48 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
+.headfoot {
+  text-align: left;
+  background: #704e75;
+  color: #D3BCC0;
+  font-size: 10px;
+  font-family: 'Chivo';
+}
+
+h1
+{
+  margin: 0;
+}
+
+.logo{
+  max-width: 10%;
+  height: auto;
+  justify-self: left;
+}
+
+ul {
+  height: 100%;
+  width: 150px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li a
+{
+  font-family: 'Chivo';
+  display: block;
+  background-color: #F2D7EE;
+  padding: 5px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #A5668B;
+  color: white;
+}
+
+
 
 html {
   color: #222;
@@ -173,9 +215,9 @@ textarea {
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
@@ -252,5 +294,6 @@ textarea {
   h3 {
     page-break-after: avoid;
   }
-}
 
+
+}
