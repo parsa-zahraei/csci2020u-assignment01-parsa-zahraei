@@ -32,11 +32,84 @@ h3#aboutpageh3-2
 
 
 /* dashboardpage */
-div#dashboardpage
+h1#dashboard-title
 {
   color:#E3E7D3;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  margin-left: 5%;
 }
+table
+{
+  border-collapse: collapse;
+  padding: 10px;
+  margin: 5% 5%;
+  display: inline-block;
+}
+th#table-header
+{
+  background-color: #7A6F9B;
+  border-radius: 2px;
+ 
+  size-adjust: 150%;
 
+  position: sticky;
+  top: 0;
+  /* makes headers stay while scrolling */
+}
+th#sidetable-header
+{
+  background-color: #715f9659;
+  border-radius: 2px;
+}
+table, tr, td, th
+{
+  color:#ffffff;
+  text-align: left;
+  padding: 5px;
+  border: none !important;
+  /* honestly not sure why !important is needed but it looks so gross with borders*/
+}
+table#chart{
+  height: 200px;
+  overflow-y: scroll;
+  /* I would've went crazy without table scrolling */
+  display: inline-block;
+}
+td
+{
+  padding-right: 100px;
+}
+h2#basetext
+{
+  color: #ffffff;
+  margin-bottom: -4%;
+  margin-left: 5%;
+}
+h2#revisedtext
+{
+  color: #ffffff;
+  margin-bottom: -4%;
+  margin-left: 5%;
+}
+div#basemodel
+{
+  opacity: 0;
+  animation: fade 4s forwards;
+  animation-delay: 2s;
+  height: 25%;
+}
+div#revisedmodel
+{
+  opacity: 0;
+  animation: fade 4s forwards;
+  animation-delay: 4s;
+}
+table#sidetables
+{
+  float: right;
+}
 
 /* homepage */
 div#homepage
@@ -60,6 +133,7 @@ div#homepage
 {
   0%{opacity: 0}
   100%{opacity: 1;}  
+  /*takes opacity from 0 and gradients it to 1*/
 }
 
 
@@ -147,4 +221,24 @@ li#navli a
 li#navli a:hover 
 {
   color: #a09ccc;
+}
+
+
+
+
+
+/* scrollbar */
+::-webkit-scrollbar
+{
+  background: #43385a5d;
+  border: none;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #7A6F9B;
+  border: none;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a09ccc;
 }
