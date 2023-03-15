@@ -4,15 +4,16 @@
 function fill_table(tableID, json){
   let tableRef = document.getElementById(tableID);
 
-  for (e in json.TestFiles){
+  for (e in json){
+    console.log("Testing Row")
     let newRow = tableRef.insertRow(-1);
     let fileCell = newRow.insertCell(0);
     let spamCell = newRow.insertCell(1);
     let classCell = newRow.insertCell(2);
 
-    let fileText = document.createTextNode(json.TestFiles[e].file);
-    let spamText = document.createTextNode(json.TestFiles[e].spamProbability);
-    let classText = document.createTextNode(json.TestFiles[e].actualClass);
+    let fileText = document.createTextNode(json[e].file);
+    let spamText = document.createTextNode(json[e].spamProbability);
+    let classText = document.createTextNode(json[e].actualClass);
 
     fileCell.appendChild(fileText);
     spamCell.appendChild(spamText);
@@ -30,10 +31,11 @@ function fill_table(tableID, json){
       },
   })
     .then(response => response.json())
-    .then(response => fill_table("table", response))
+    .then(response => fill_table("chart", response))
     .catch((err) => {
       console.log("something went wrong: " + err);
     });
+  console.log("Testing")
 })();
 
 
