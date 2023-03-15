@@ -21,6 +21,8 @@ public class SpamResource {
 
 //    your SpamDetector Class responsible for all the SpamDetecting logic
     SpamDetector detector = new SpamDetector();
+
+    //Json Mapper declaration
     ObjectMapper jsonMapper = new ObjectMapper();
 
     List<TestFile> testList = null;
@@ -31,12 +33,15 @@ public class SpamResource {
     private int falseNegatives = 0;
 
 
+    //Function Runs in background upon startup
     SpamResource() throws FileNotFoundException {
 //        TODO: load resources, train and test to improve performance on the endpoint calls
         System.out.print("Training and testing the model, please wait");
 
+        //Populate the testList
         testList = trainAndTest();
 
+        //Evaluate the model based on the testList
         APCalc();
 
         System.out.print("Breakpoint here");
@@ -56,6 +61,7 @@ public class SpamResource {
         return res;
     }
 
+    //Return testList as json response object
     @GET
     @Path("/json")
     @Produces("application/json")
@@ -64,8 +70,9 @@ public class SpamResource {
 
         String json = null;
 
+        //Serialize testList using the JsonMapper
         try{
-            json = jsonMapper.writeValueAsString(testList);
+            json = jsonMapper.writeValueAsString(testList); //Return a string representation of the json objects
         }catch (JsonProcessingException e){
             e.printStackTrace();
         }
@@ -79,10 +86,14 @@ public class SpamResource {
 
     }
 
+    //Caculate the number of true positives, true negatives, false positives and false negatives contained within
+    //testList
     private void APCalc(){
 
         for (TestFile file:  testList){
 
+            //If a TestFile object has a spamProbability value greater than 50%, and it's actual class is spam,
+            //then it is a true positive. If its actual class is not spam, then it's a false positive
             if ( file.getSpamProbability() > 0.50){
                 if (file.getActualClass() == "spam"){
                     truePositives++;
@@ -91,6 +102,8 @@ public class SpamResource {
                     falsePositives++;
                 }
             }
+            //If a TestFile object has a spamProbability value less than 50%, and it's actual class is ham,
+            //then it is a true negative. It its actual class is not ham, then it's a false negative
             else{
                 if (file.getActualClass() == "ham"){
                     trueNegatives++;
@@ -104,6 +117,7 @@ public class SpamResource {
 
     }
 
+    //Internal class that represents the accuracy of the model
     class Accuracy{
         int TruePositives;
         int TrueNegatives;
@@ -130,14 +144,18 @@ public class SpamResource {
 
     }
 
+    //Returns an accuracy object as a json response object, containing information about the model's accuracy, the number of true positives,
+    //and the number of true negatives
     @GET
     @Path("/accuracy")
     @Produces("application/json")
     public Response getAccuracy() {
 //      TODO: return the accuracy of the detector, return in a Response object
 
+        //Calculate the percentage accuracy of the model
         double accuracyPercent = (double) (truePositives + trueNegatives)/(testList.size());
 
+        //Create the accuracy object
         Accuracy accuracy = new Accuracy(truePositives, trueNegatives, accuracyPercent);
 
         String accuracyJson = null;
@@ -157,18 +175,24 @@ public class SpamResource {
         return accuracyResp;
     }
 
+    //Internal class that represents the precision of the model
     class Precision{
 
         int TruePositives;
         int FalsePositives;
 
+        int FalseNegatives;
+
         double PrecisionPercent;
 
-        Precision(int TruePositives, int FalsePositives, double PrecisionPercent){
+        Precision(int TruePositives, int FalsePositives, int FalseNegatives, double PrecisionPercent){
             this.TruePositives = TruePositives;
             this.FalsePositives = FalsePositives;
             this.PrecisionPercent = PrecisionPercent;
+            this.FalseNegatives = FalseNegatives;
         }
+
+        //Set getter functions to allow for serialization of the fields
 
         public int getTruePositives(){
             return  this.TruePositives;
@@ -178,13 +202,16 @@ public class SpamResource {
             return this.FalsePositives;
         }
 
+        public int getFalseNegatives(){return this.FalseNegatives;}
+
         public double getPrecisionPercent(){
             return PrecisionPercent;
         }
 
-
     }
 
+    //Returns a precision object as a json response object, containing information about the model's precision, the number of true positives,
+    //and the number of false positives
     @GET
     @Path("/precision")
     @Produces("application/json")
@@ -193,7 +220,7 @@ public class SpamResource {
 
         double precisionPercent = (double) (truePositives)/(falsePositives + truePositives);
 
-        Precision precision = new Precision(truePositives, falsePositives, precisionPercent);
+        Precision precision = new Precision(truePositives, falsePositives, falseNegatives, precisionPercent);
 
         String precisionJson = null;
 
