@@ -1,6 +1,6 @@
 // TODO: onload function should retrieve the data needed to populate the UI
 
-
+//Populates the tabel with data of the testFile list
 function fill_table(tableID, json){
   let tableRef = document.getElementById(tableID);
 

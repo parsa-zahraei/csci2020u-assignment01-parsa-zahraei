@@ -239,6 +239,7 @@ public class SpamResource {
         return precisionResp;
     }
 
+
     private List<TestFile> trainAndTest() throws FileNotFoundException {
         if (this.detector==null){
             this.detector = new SpamDetector();

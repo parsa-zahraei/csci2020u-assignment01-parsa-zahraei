@@ -226,6 +226,8 @@ public class SpamDetector {
 
     }
 
+    //Credit to Mariana Shimabukuro for creating this function
+    //Function taken from W23-Lecture-Examples-ParsingFiles
     private Boolean isWord(String word){
         if (word == null){
             return false;
