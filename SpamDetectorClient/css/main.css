@@ -47,22 +47,18 @@ table
   margin: 5% 5%;
   display: inline-block;
 }
-th#table-header
+th
 {
   background-color: #7A6F9B;
   border-radius: 2px;
- 
+
   size-adjust: 150%;
 
   position: sticky;
   top: 0;
   /* makes headers stay while scrolling */
 }
-th#sidetable-header
-{
-  background-color: #715f9659;
-  border-radius: 2px;
-}
+
 table, tr, td, th
 {
   color:#ffffff;
@@ -132,7 +128,7 @@ div#homepage
 @keyframes fade
 {
   0%{opacity: 0}
-  100%{opacity: 1;}  
+  100%{opacity: 1;}
   /*takes opacity from 0 and gradients it to 1*/
 }
 
@@ -218,7 +214,7 @@ li#navli a
   text-decoration: none;
 }
 
-li#navli a:hover 
+li#navli a:hover
 {
   color: #a09ccc;
 }

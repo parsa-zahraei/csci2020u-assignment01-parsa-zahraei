@@ -94,7 +94,7 @@ public class SpamResource {
 
             //If a TestFile object has a spamProbability value greater than 50%, and it's actual class is spam,
             //then it is a true positive. If its actual class is not spam, then it's a false positive
-            if ( file.getSpamProbability() > 0.50){
+            if ( file.getSpamProbability() > 0.75){
                 if (file.getActualClass() == "spam"){
                     truePositives++;
                 }

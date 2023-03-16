@@ -170,6 +170,7 @@ public class SpamDetector {
             double probSWi = (probWiS)/(probWiS + probWiH);
 
             probMap.put(key, probSWi);
+
         }
 
         return probMap;
@@ -197,16 +198,15 @@ public class SpamDetector {
                     //Check if word contains only letters
                     if (isWord(word)){
 
-
                         if (probMap.containsKey(word)){
 
+                            double probWord = probMap.get(word);
+
                             //If the probability that the word is contained in spam file is greater than 0, use it to evaluate nu
-                            if ((probMap.get(word) > 0) && probMap.get(word) < 1){
-                                nu += Math.log(1- probMap.get(word)) - Math.log(probMap.get(word));
+                            if ((probWord > 0) && probWord < 1){
+                                nu += Math.log(1- probWord) - Math.log(probWord);
                             }
-
                         }
-
 
                     }
                 }

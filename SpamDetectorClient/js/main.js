@@ -23,23 +23,22 @@ function fill_table(tableID, json){
 
 }
 
+//Root JavaScript function
 (function() {
+  //Endpoint call to populate table
   fetch("http://localhost:8080/spamDetector-1.0/api/spam/json", {
     method: "Get",
-      headers: {
-        "Accept": "application/json"
-      },
+    headers: {
+      "Accept": "application/json"
+    },
   })
     .then(response => response.json())
     .then(response => fill_table("chart", response))
     .catch((err) => {
       console.log("something went wrong: " + err);
     });
-  console.log("Testing")
-})();
 
-
-function load_accuracy(){
+  //Endpoint call to record accuracy and number of true positives and negatives
   fetch("http://localhost:8080/spamDetector-1.0/api/spam/accuracy", {
     method: "Get",
     headers: {
@@ -47,8 +46,64 @@ function load_accuracy(){
     },
   })
     .then(response => response.json())
+    .then(response => load_accuracy("Stats", "Values", response))
     .catch((err) => {
-    console.log("something went wrong: " + err);
-  });
+      console.log("something went wrong: " + err);
+    });
 
+  //Endpoint call to record precision and number of false positives and negatives
+  fetch("http://localhost:8080/spamDetector-1.0/api/spam/precision", {
+    method: "Get",
+    headers: {
+      "Accept": "application/json"
+    },
+  })
+    .then(response => response.json())
+    .then(response => load_precision("Stats","Values", response))
+    .catch((err) => {
+      console.log("something went wrong: " + err);
+    });
+
+  })();
+
+
+
+
+//Function records the accuracy of the model, as well as the number of true positives and true negatives produced
+function load_accuracy(statsID, performanceID, json){
+
+  //Access the first td element of the stats table
+  let tdElementsStats = document.getElementById(statsID).getElementsByTagName("td");
+
+  //Add the accuracy measurement to the stats table
+  tdElementsStats[0].innerHTML = json.accuracyPercent;
+
+  //Access the first and third td elements
+  let tdElementsPerform = document.getElementById(performanceID).getElementsByTagName("td");
+
+  //Record the number of true positives
+  tdElementsPerform[0].innerHTML = json.truePositives;
+
+  //Record the number of true negatives
+  tdElementsPerform[2].innerHTML = json.trueNegatives;
+
+}
+
+//Function records the precision of the model, as well as the number of false positives and false negatives produced
+function load_precision(statsID, performanceID, json){
+
+  //Access the second td element of the stats table
+  let tdElementsStats = document.getElementById(statsID).getElementsByTagName("td");
+
+  //Add the accuracy measurement to the stats table
+  tdElementsStats[1].innerHTML = json.precisionPercent;
+
+  //Access the second and fourth td elements
+  let tdElementsPerform = document.getElementById(performanceID).getElementsByTagName("td");
+
+  //Record the number of false positives
+  tdElementsPerform[1].innerHTML = json.falsePositives;
+
+  //Record the number of false negatives
+  tdElementsPerform[3].innerHTML = json.falseNegatives;
 }
