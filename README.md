@@ -26,12 +26,12 @@ The data is split into three tables for readability. Those being the main format
 &nbsp;
 
 ### Improvements
-There were many improvments to the interface. We ended up creating our own .css file as the provided one was too populated with unecessary code for our websites vision. We utilized keyframing and implemented a 'fade in' animation for many elements, we also used a background image and custom scrollbar to keep the websites theme intact with help from w3Schools documentation. In order to get this model to run when there is a 0% or 100% probability for a word, we added a conidition as taking the log of either of these numbers isn't possible. 
+There were many improvments to the interface. We ended up creating our own .css file as the provided one was too populated with unecessary code for our websites vision. We utilized keyframing and implemented a 'fade in' animation for many elements, we also used a background image and custom scrollbar to keep the websites theme intact with help from w3Schools documentation. 
+
+In order to get this model to run when there is a 0% or 100% probability for a word, we added a conidition as taking the log of either of these numbers isn't possible. 
 ![Log Adjustment Condition](./SpamDetectorClient/img/logAdjustment.png)
 
-&nbsp;
-
-Also, we tried writing the code as effciently as possible by making sure each of each of the wordmaps had the same value and a few other minor changes. This resulted in having a base precision and accuracy notably higher than the assignment examples.
+Revising the model was done by changing the probabiltiy threshold from 50 to 75, which resulted in an accuracy of 0.8732 instead of 0.8714, and a precision of 0.8952 instead of 0.8850
 
 
 &nbsp;
@@ -64,3 +64,10 @@ Also, we tried writing the code as effciently as possible by making sure each of
 
 [webtoolkit](https://www.webtoolkit.eu/wt)
 - Scrollbar manipulation
+
+### Credits
+
+This assignment was completed by:
+
+- Parsa Zahraei Mohammadabady 100749173
+- Clayton Cotter-Wasmund 100824037
