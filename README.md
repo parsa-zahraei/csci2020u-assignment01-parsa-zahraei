@@ -1,48 +1,66 @@
-# Assignment 01 - Spam Detector (Instructions)
-> Course: CSCI 2020U: Software Systems Development and Integration
+## readme.md
 
-This is the template for your Assignment 01.
 
-## Overview
-You have become frustrated with all the advertisements in your inbox. You resolve to create a spam detector to filter out the spam. The spam detector will use a dataset of E-Mails (spam or otherwise) to train your program to recognize whether or not new E-Mails are spam. The program will use a unigram approach [1], where each word is counted and associated with whether or not the message is spam. Your program will calculate probabilities based on each word’s frequency [2]. Luckily, you have not emptied your spam folder or inbox in quite a while, so you have many samples to use to train your system. 
+### Project Information
+Assignment 1 is a spam detection dashboard that takes given email files with the knowledge of which are spam and which are ham, and creates a probability map for the chances of each file being spam or ham based on the occurance of a word relative to how common that word is in both the ham and spam files. 
 
-- Check the `Canvas/Assingments/Assignment 01` for more the detailed instructions.
+This probability is calculated with the standard Bayes spam filtering equation.
+![Naive Bayes spam filtering equation](./img/NaiveBayes.svg)
+Where:
+- Pr(S|W) is the probability that a message is a spam, knowing that the word "replica" is in it;
+- Pr(S) is the overall probability that any given message is spam;
+- Pr(W|S) is the probability that the word "replica" appears in spam messages
+- Pr(H) is the overall probability that any given message is not spam (is "ham");
+- Pr(W|H) is the probability that the word "replica" appears in ham messages.
 
-### SpamDetectorServer - Endpoints
 
-**Listing all the test files**
+&nbsp;
 
-This will return a `application/json` content type.
-- `http://localhost:8080/spamDetector-1.0/api/spam`
-See a sample of the response data:
-```
-[{"spamProbRounded":"0.00000","file":"00006.654c4ec7c059531accf388a807064363","spamProbability":5.901245803391957E-62,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00007.2e086b13730b68a21ee715db145522b9","spamProbability":2.800348071907053E-12,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00008.6b73027e1e56131377941ff1db17ff12","spamProbability":8.66861037294167E-14,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00009.13c349859b09264fa131872ed4fb6e4e","spamProbability":6.947265471550557E-12,"actualClass":"Ham"},{"spamProbRounded":"0.00000","file":"00010.d1b4dbbad797c5c0537c5a0670c373fd","spamProbability":1.8814467288977145E-7,"actualClass":"Ham"},{"spamProbRounded":"0.00039","file":"00011.bc1aa4dca14300a8eec8b7658e568f29","spamProbability":3.892844289937937E-4,"actualClass":"Ham"}]
-```
 
-**Calculate and get accuracy**
-This will return a `application/json` content type.
-- `http://localhost:8080/spamDetector-1.0/api/spam/accuracy`
-See a sample of the response data:
-```
-{"val": 0.87564}
-```
+This data is then exported as a json file and appened to tables for our dashboard.
+![Website Demo](./img/websiteDemo.jpg)
+The data is split into three tables for readability. Those being the main formatted json file tabulated, a table of the accuracy and precision percentages, and a table for the numbers of correct and false guesses for both spam and ham files. With percentages being represented in their integer value.
 
-**Calculate and get precision**
-This will return a `application/json` content type.
-- `http://localhost:8080/spamDetector-1.0/api/spam/precision`
-See a sample of the response data:
-```
-{"val": 0.56484}
-```
-### SpamDetectorServer - SpamDetector class
+&nbsp;
 
-Most of your programming will be in the `SpamDetector` class. This class will be responsible for reading the testing and training data files, training, and tesing the model.
+&nbsp;
 
-> Obs1. Feel free to create other helper classes as you see fit.
-> 
-> Obs2. You are not expected to get the exact same values as the ones shown in the samples.
+### Improvements
+There were many improvments to the interface. We ended up creating our own .css file as the provided one was too populated with unecessary code for our websites vision. We utilized keyframing and implemented a 'fade in' animation for many elements, we also used a background image and custom scrollbar to keep the websites theme intact with help from w3Schools documentation. In order to get this model to run when there is a 0% or 100% probability for a word, we added a conidition as taking the log of either of these numbers isn't possible. 
+![Log Adjustment Condition](./img/logAdjustment.png)
 
-### References 
-[1] https://en.wikipedia.org/wiki/Bag-of-words_model 
+&nbsp;
 
-[2] https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering 
+Also, we tried writing the code as effciently as possible by making sure each of each of the wordmaps had the same value and a few other minor changes. This resulted in having a base precision and accuracy notably higher than the assignment examples.
+
+
+&nbsp;
+
+&nbsp;
+
+### How To Run
+1. Clone this repository into your desired folder.
+2. Launch this repository in intelliJ with administrator privileges.
+3. Add a configuration to open a local GlassFish server with OpenJDK and deploy the exploaded artifact with the 'play' button.
+4. Launch any .html page through intelliJ by running it as the current file, which is in the same drop down as the GlassFish configuration, then hit the 'play' button.
+5. Navigate to dashboard.html by selecting dashboard with the navigation bar in the header on each page (if not their already).
+
+&nbsp;
+
+&nbsp;
+
+### Resources
+[Wikipedia](https://en.wikipedia.org/wiki/Naive_Bayes_spam_filtering)
+- Filter equation photo and explanation
+
+[w3Schools](https://www.w3schools.com/)
+- General css documentation
+
+[Coolors](https://coolors.co/)
+- Colour pallette help
+
+[TopTal](https://www.toptal.com/designers/subtlepatterns/cartographer/)
+- Website background image
+
+[webtoolkit](https://www.webtoolkit.eu/wt)
+- Scrollbar manipulation
