@@ -5,7 +5,7 @@
 Assignment 1 is a spam detection dashboard that takes given email files with the knowledge of which are spam and which are ham, and creates a probability map for the chances of each file being spam or ham based on the occurance of a word relative to how common that word is in both the ham and spam files. 
 
 This probability is calculated with the standard Bayes spam filtering equation.
-![Naive Bayes spam filtering equation](./img/NaiveBayes.svg)
+![Naive Bayes spam filtering equation](./SpamDetectorClient/img/NaiveBayes.svg)
 Where:
 - Pr(S|W) is the probability that a message is a spam, knowing that the word "replica" is in it;
 - Pr(S) is the overall probability that any given message is spam;
@@ -18,7 +18,7 @@ Where:
 
 
 This data is then exported as a json file and appened to tables for our dashboard.
-![Website Demo](./img/websiteDemo.jpg)
+![Website Demo](./SpamDetectorClient/img/websiteDemo.jpg)
 The data is split into three tables for readability. Those being the main formatted json file tabulated, a table of the accuracy and precision percentages, and a table for the numbers of correct and false guesses for both spam and ham files. With percentages being represented in their integer value.
 
 &nbsp;
@@ -27,7 +27,7 @@ The data is split into three tables for readability. Those being the main format
 
 ### Improvements
 There were many improvments to the interface. We ended up creating our own .css file as the provided one was too populated with unecessary code for our websites vision. We utilized keyframing and implemented a 'fade in' animation for many elements, we also used a background image and custom scrollbar to keep the websites theme intact with help from w3Schools documentation. In order to get this model to run when there is a 0% or 100% probability for a word, we added a conidition as taking the log of either of these numbers isn't possible. 
-![Log Adjustment Condition](./img/logAdjustment.png)
+![Log Adjustment Condition](./SpamDetectorClient/img/logAdjustment.png)
 
 &nbsp;
 
